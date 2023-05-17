@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'transaction.dart';
+import 'wallet.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -8,6 +10,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final List<Widget> transactions = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,6 +22,8 @@ class _HomeScreenState extends State<HomeScreen> {
             top(),
             balanceBox(),
 
+            transactionHistory(),
+            sendAgain(),
           ],
         ),
       ),
@@ -153,18 +159,21 @@ class _HomeScreenState extends State<HomeScreen> {
                               backgroundColor:
                                   const Color.fromRGBO(94, 143, 140, 1),
                               onPressed: () {},
-                              child: const Icon(Icons.arrow_circle_down, size: 15),
+                              child:
+                                  const Icon(Icons.arrow_circle_down, size: 15),
                             ),
                           ),
                           const SizedBox(width: 10),
-                          const Text("Income",
-                              style: TextStyle(
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.w500,
-                            fontSize: 16.0,
-                            color: Colors.white,
-                             ),)
-                            ],
+                          const Text(
+                            "Income",
+                            style: TextStyle(
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16.0,
+                              color: Colors.white,
+                            ),
+                          )
+                        ],
                       ),
                       const SizedBox(height: 10),
                       Text(
@@ -174,7 +183,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           fontWeight: FontWeight.w600,
                           fontSize: 20.0,
                           color: Colors.white,
-                        ),)
+                        ),
+                      )
                     ],
                   ),
                 ),
@@ -198,13 +208,16 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                           const SizedBox(width: 10),
-                          const Text("Expenses",
+                          const Text(
+                            "Expenses",
                             style: TextStyle(
                               fontFamily: 'Inter',
                               fontWeight: FontWeight.w500,
                               fontSize: 16.0,
                               color: Colors.white,
-                            ),) ],
+                            ),
+                          )
+                        ],
                       ),
                       const SizedBox(height: 10),
                       Text(
@@ -214,7 +227,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           fontWeight: FontWeight.w600,
                           fontSize: 20.0,
                           color: Colors.white,
-                        ),)
+                        ),
+                      )
                     ],
                   ),
                 ),
@@ -225,10 +239,131 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-  Widget transactionHistory(){
-    return Positioned(child: SizedBox(
 
-    )
+  Widget transactionHistory() {
+    return SizedBox(
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
+      child: Column(
+        children: [
+          const SizedBox(
+            height: 360,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              const Text(
+                "Transactions History",
+                style: TextStyle(
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w600,
+                  fontSize: 18.0,
+                  color: Colors.black,
+                  decoration: TextDecoration.none,
+                ),
+              ),
+              TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/wallet");
+                  },
+                  child: const Text(
+                    "See all",
+                    style: TextStyle(
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w400,
+                      fontSize: 14.0,
+                      color: Colors.black87,
+                      decoration: TextDecoration.none,
+                    ),
+                  ))
+            ],
+          ),
+          SizedBox(
+              height: MediaQuery.of(context).size.height - 450,
+              child: ListView.builder(
+                padding: const EdgeInsets.all(10),
+                itemCount: transactions.length,
+                itemBuilder: (BuildContext context, int index) {
+                  final transaction = transactions[index];
+                  return transaction;
+                },
+              )),
+        ],
+      ),
     );
+  }
+
+  Widget sendAgain() {
+    return Positioned(
+        left: 15,
+        right: 15,
+        bottom: 10,
+        child: Container(
+            height: 120,
+            width: MediaQuery.of(context).size.width,
+            decoration: const BoxDecoration(
+              color: Colors.white,
+            ),
+            child: SingleChildScrollView(
+              child: Column(
+
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text("Send Again",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20)),
+                      TextButton(
+                        onPressed: (() => {}),
+                        child: const Text("See all",
+                            style:
+                                TextStyle(fontSize: 15, color: Colors.black54)),
+                      )
+                    ],
+                  ),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        FloatingActionButton(
+                            onPressed: () {},
+                            child: const CircleAvatar(
+                              backgroundImage:
+                                  AssetImage("assets/images/person1.png"),
+                              radius: 200,
+                            )),
+                        FloatingActionButton(
+                            onPressed: () {},
+                            child: const CircleAvatar(
+                              backgroundImage:
+                                  AssetImage("assets/images/person2.png"),
+                              radius: 200,
+                            )),
+                        FloatingActionButton(
+                            onPressed: () {},
+                            child: const CircleAvatar(
+                              backgroundImage:
+                                  AssetImage("assets/images/person3.png"),
+                              radius: 200,
+                            )),
+                        FloatingActionButton(
+                            onPressed: () {},
+                            child: const CircleAvatar(
+                              backgroundImage:
+                                  AssetImage("assets/images/person4.png"),
+                              radius: 200,
+                            )),
+                        FloatingActionButton(
+                            onPressed: () {},
+                            child: const CircleAvatar(
+                              backgroundImage:
+                                  AssetImage("assets/images/person5.png"),
+                              radius: 200,
+                            )),
+                      ]),
+                ],
+              ),
+            )));
   }
 }

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-class AddExpense extends StatefulWidget {
-  const AddExpense({Key? key}) : super(key: key);
+class Payment extends StatefulWidget {
+  const Payment({Key? key}) : super(key: key);
 
   @override
-  State<AddExpense> createState() => _AddExpenseState();
+  State<Payment> createState() => _PaymentState();
 }
 
-class _AddExpenseState extends State<AddExpense> {
+class _PaymentState extends State<Payment> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,6 +15,7 @@ class _AddExpenseState extends State<AddExpense> {
           // alignment: Alignment.center,
           children: [
             top(),
+            back(),
           ],
         ),
       ),
@@ -50,12 +51,12 @@ class _AddExpenseState extends State<AddExpense> {
                         color: Colors.white,
                       ),
                       onPressed: () {
-                        Navigator.pushNamed(context, '/home_screen');
+                        Navigator.pushNamed(context, '/bill');
                       },
                     ),
-                    SizedBox(width: 140,),
+                    SizedBox(width: 120,),
                     Text(
-                      "Add Expense",
+                      "Bill Payment",
                       style: TextStyle(
                         fontFamily: 'Inter',
                         fontWeight: FontWeight.w600,
@@ -73,10 +74,9 @@ class _AddExpenseState extends State<AddExpense> {
   Widget back() {
     return Positioned(
       top:165,
-      left: 28,
       child: Container(
           height: MediaQuery.of(context).size.height-165,
-          width: MediaQuery.of(context).size.width-56,
+          width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
